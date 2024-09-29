@@ -1,7 +1,7 @@
 {
     "name": "unplugin-posthtml",
     "type": "module",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Unplugin for posthtml",
     "contributors": [
         {
@@ -130,13 +130,13 @@
     "dependencies": {
         "posthtml": "0.16.6",
         "posthtml-load-config": "2.0.0",
-        "unplugin": "^1.12.2"
+        "unplugin": "^1.12.2",
+        "@recursive/assign": "^3.0.1"
     },
     "devDependencies": {
         "@biomejs/biome": "1.9.2",
         "@nuxt/kit": "^3.13.0",
         "@nuxt/schema": "^3.13.0",
-        "@recursive/assign": "^3.0.1",
         "@swc/cli": "^0.4.1-nightly.20240914",
         "@swc/core": "1.7.28",
         "@types/bun": "^1.1.10",
