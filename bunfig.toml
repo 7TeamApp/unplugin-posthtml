@@ -1,9 +1,7 @@
 [install]
 peer = true
 auto = "auto"
-frozenLockfile = true
 registry = "https://registry.npmjs.org"
-exact = true
 
 [run]
 bun = true
