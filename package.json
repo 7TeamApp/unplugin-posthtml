@@ -86,12 +86,15 @@
         "dev": "bun run init && bun run format && bun run clean && tsup --watch src",
         "clean": "bun -b --silent -e \"import $ from 'bun';await $`rm -rf dist`\"",
         "init": "bun -b -e \"await Bun.file('node_modules/unplugin/package.json').exists()||(console.log('Installing dependencies...'),Bun.spawn(['bun','i']))\"",
-        "test": "bun test",
         "build": "bun run init && bun run format && bun run clean && tsup",
-        "build:fix": "bun scripts/postbuild.ts",
+        "build:fix": "bun scripts/postbuild.ts && buildtest",
+        "buildtest": "tsup --config test/tester.config.ts",
         "format": "bun x -b biome check --write ./",
         "prerelease": "bun run build && bun test && bun scripts/prepublish.ts",
-        "release": "git add . && bun x -b bumpp --all"
+        "release": "git add . && bun x -b bumpp --all",
+        "test": "node ./scripts/tester.cjs",
+        "vitest": "vitest",
+        "jest": "jest"
     },
     "peerDependencies": {
         "@farmfe/core": ">=1",
@@ -132,27 +135,30 @@
         "@recursive/assign": "^3.0.1"
     },
     "devDependencies": {
-        "@biomejs/biome": "1.9.2",
+        "@biomejs/biome": "latest",
         "@farmfe/core": "1.3.31",
         "@nuxt/kit": "^3.13.0",
         "@nuxt/schema": "^3.13.0",
         "@swc/cli": "^0.4.1-nightly.20240914",
         "@swc/core": "1.7.28",
-        "@types/bun": "1.1.12",
+        "@types/bun": "latest",
         "@types/cosmiconfig": "4.0.0",
-        "@types/node": "22.8.6",
+        "@types/node": "latest",
         "astro": "^4.16.8",
         "bumpp": "latest",
-        "bun": "1.1.34",
+        "bun": "latest",
         "chalk": "^5.3.0",
         "nuxt": "3.13.2",
         "fast-glob": "^3.3.2",
+        "jest": "latest",
+        "lib": "file:./lib",
         "rollup": "^4.21.2",
         "rolldown": "0.13.2",
         "@rspack/core": "1.0.14",
         "tsup": "8.3.5",
         "typescript": "5.6.3",
         "vite": "^5.4.2",
+        "vitest": "latest",
         "webpack": "^5.94.0"
     }
 }

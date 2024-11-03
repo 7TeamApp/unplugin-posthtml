@@ -21,8 +21,53 @@ defaults:
     run:
         shell: bash
 jobs:
+    Build:
+        name: Build dist
+        strategy:
+            fail-fast: false
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4.2.1
+          - name: Install node
+            uses: actions/setup-node@v4
+            with:
+                node-version: ${{ matrix.node }}
+          - name: Check node
+            run: |
+                node -v
+                npm -v
+                node -p "process.platform"
+                node -p "process.arch"
+          - name: Check yarn
+            run: yarn -v
+          - name: Install Bun
+            uses: oven-sh/setup-bun@v2.0.1
+          - name: Check Bun
+            run: |
+                bun -v
+                bun -e "console.log(process.platform)"
+                bun -e "console.log(process.arch)"
+          - name: Install dependencies
+            run: bun i
+          - name: Build
+            run: bun run build
+          - name: Upload dist artifact
+            uses: actions/upload-artifact@v4
+            with:
+                name: bindings-dist
+                path: "dist/**/*"
+                if-no-files-found: error
+          - name: Upload test_dist artifact
+            uses: actions/upload-artifact@v4
+            with:
+                name: bindings-test-dist
+                path: "test_dist/**/*"
+                if-no-files-found: error
     Test:
         name: Test ${{ matrix.settings.target }}-node@${{ matrix.node }}
+        needs:
+            - Build
         strategy:
             fail-fast: false
             matrix:
@@ -59,75 +104,16 @@ jobs:
                 bun -e "console.log(process.platform)"
                 bun -e "console.log(process.arch)"
           - name: Install dependencies
-            run: bun i --no-save
-          - name: Build
-            run: bun run build
-          - name: Upload dist artifact
-            uses: actions/upload-artifact@v4
-            with:
-                name: bindings-dist
-                path: "dist/**/*"
-                if-no-files-found: error
-          - name: Bun test
-            run: bun test
-    Publish:
-        name: Publish in ${{matrix.registry}}
-        needs:
-            - Test
-        strategy:
-            fail-fast: false
-            matrix:
-                registry:
-                    - npm
-                    - jsr
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v4.2.1
-          - name: Install node
-            uses: actions/setup-node@v4
-            with:
-                node-version: 20
-                registry-url: 'https://registry.npmjs.org'
-          - name: Check node
-            run: |
-                node -v
-                npm -v
-                node -p "process.platform"
-                node -p "process.arch"
-          - name: Check yarn
-            run: yarn -v
-          - name: Install Bun
-            if: ${{ matrix.registry == 'npm' }}
-            uses: oven-sh/setup-bun@v2.0.1
-            with:
-                registry-url: 'https://registry.npmjs.org'
-          - name: Install Bun
-            if: ${{ matrix.registry == 'jsr2' }}
-            uses: oven-sh/setup-bun@v2.0.1
-          - name: Check Bun
-            run: |
-                bun -v
-                bun -e "console.log(process.platform)"
-                bun -e "console.log(process.arch)"
-          - name: Install dependencies
-            if: ${{ matrix.registry == 'npm' }}
             run: bun i
-          - name: Install dependencies
-            if: ${{ matrix.registry == 'jsr2' }}
-            run: bun i --no-save
           - name: Download dist artifacts
             uses: actions/download-artifact@v4
             with:
                 name: bindings-dist
                 path: 'dist'
-          - name: Publish package
-            if: ${{ matrix.registry == 'npm' }}
-            run: npm publish
-            env:
-                BUN_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-                NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          - name: Publish package
-            if: ${{ matrix.registry == 'jsr2' }}
-            run: bunx -b jsr publish
-            
+          - name: Download test_dist artifacts
+            uses: actions/download-artifact@v4
+            with:
+                name: bindings-test-dist
+                path: 'test_dist'
+          - name: Bun test
+            run: bun run test

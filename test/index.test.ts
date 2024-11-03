@@ -1,7 +1,5 @@
-import { describe, expect, it } from 'bun:test';
+import {test, expect} from 'lib/tester';
 
-describe('index', () => {
-    it('hi bun:test', () => {
-        expect(1).toBe(1);
-    });
+test('index', () => {
+    expect(1).toBe(1);
 });
