@@ -1,7 +1,7 @@
 {
     "name": "unplugin-posthtml",
     "type": "module",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "Unplugin for posthtml",
     "contributors": [
         {

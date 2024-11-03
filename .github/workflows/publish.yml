@@ -108,5 +108,10 @@ jobs:
             with:
                 name: bindings-dist
                 path: 'dist'
+          - name: Publish package in npm
+            run: bun publish
+            env:
+                BUN_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           - name: Publish package in jsr
             run: bunx -b jsr publish
