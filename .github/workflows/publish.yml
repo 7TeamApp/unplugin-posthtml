@@ -98,7 +98,13 @@ jobs:
                 node -p "process.arch"
           - name: Check yarn
             run: yarn -v
+          - name: Install npm
+            if: ${{ matrix.registry == 'npm' }}
+            uses: oven-sh/setup-bun@v2.0.1
+            with:
+                registry-url: 'https://registry.npmjs.org'
           - name: Install Bun
+            if: ${{ matrix.registry == 'jsr2' }}
             uses: oven-sh/setup-bun@v2.0.1
           - name: Check Bun
             run: |
@@ -109,7 +115,7 @@ jobs:
             if: ${{ matrix.registry == 'npm' }}
             run: bun i
           - name: Install dependencies
-            if: ${{ matrix.registry == 'jsr' }}
+            if: ${{ matrix.registry == 'jsr2' }}
             run: bun i --no-save
           - name: Download dist artifacts
             uses: actions/download-artifact@v4
@@ -123,6 +129,6 @@ jobs:
                 BUN_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
                 NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           - name: Publish package
-            if: ${{ matrix.registry == 'jsr' }}
+            if: ${{ matrix.registry == 'jsr2' }}
             run: bunx -b jsr publish
             
