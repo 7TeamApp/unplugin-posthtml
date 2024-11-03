@@ -1,7 +1,6 @@
 [install]
 peer = true
 auto = "auto"
-registry = "https://registry.npmjs.org"
 
 [run]
 bun = true
