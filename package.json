@@ -91,7 +91,7 @@
         "build:fix": "bun scripts/postbuild.ts",
         "format": "bun x -b biome check --write ./",
         "prerelease": "bun run build && bun test && bun scripts/prepublish.ts",
-        "release": "git add . && bun x -b bumpp --all"
+        "release": "git add . && bun x -b bumpp --all --no-tag"
     },
     "peerDependencies": {
         "@farmfe/core": ">=1",

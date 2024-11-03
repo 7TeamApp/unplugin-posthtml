@@ -10,9 +10,7 @@
             "README.md",
             "jsr.json",
             "LICENSE",
-            "package.json",
-            "tsup.config.ts",
-            "tsconfig.json"
+            "package.json"
         ],
         "exclude": ["!**/*.{cjs, cts}"]
     },
