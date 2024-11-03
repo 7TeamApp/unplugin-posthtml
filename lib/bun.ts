@@ -1,6 +1,6 @@
 import { exec } from 'node:child_process';
 import fs from 'node:fs';
-let Bun;
+let Bun = null;
 
 const _Bun = {
     write: (path: string, data: string) =>

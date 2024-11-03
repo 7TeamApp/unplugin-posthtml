@@ -93,37 +93,45 @@
                     }
                 }
             }
-            },{
-                "include": ["./**/*.test.*", "./**/*.spec.*"],
-                "linter": {
-                    "rules": {
-                        "suspicious": {
-                            "noConsole": "off",
-                            "noConsoleLog": "off"
-                        }
-                    }
-                }
-            },{
-                "include": ["./scripts/*.cjs", "./lib/**/*"],
-                "linter": {
-                    "rules": {
-                        "suspicious": {
-                            "noConsole": "off",
-                            "noConsoleLog": "off"
-                        },
-                        "complexity": {
-                            "useArrowFunction": "off",
-                            "noExcessiveCognitiveComplexity": "off"
-                        },
-                        "correctness": {
-                            "noInnerDeclarations": "off"
-                        },
-                        "style": {
-                            "noVar": "off",
-                            "useTemplate": "off"
-                        }
+        },
+        {
+            "include": ["./**/*.test.*", "./**/*.spec.*"],
+            "linter": {
+                "rules": {
+                    "suspicious": {
+                        "noConsole": "off",
+                        "noConsoleLog": "off"
                     }
                 }
             }
+        },
+        {
+            "include": ["./scripts/*.cjs", "./lib/**/*"],
+            "linter": {
+                "rules": {
+                    "suspicious": {
+                        "noConsole": "off",
+                        "noConsoleLog": "off",
+                        "noRedeclare": "off",
+                        "useErrorMessage": "off",
+                        "noEvolvingTypes": "off"
+                    },
+                    "complexity": {
+                        "useArrowFunction": "off",
+                        "noExcessiveCognitiveComplexity": "off"
+                    },
+                    "correctness": {
+                        "noInnerDeclarations": "off"
+                    },
+                    "style": {
+                        "noVar": "off",
+                        "useTemplate": "off"
+                    },
+                    "performance": {
+                        "noReExportAll": "off"
+                    }
+                }
+            }
+        }
     ]
 }
