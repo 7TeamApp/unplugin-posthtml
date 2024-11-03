@@ -1,7 +1,7 @@
 {
     "name": "unplugin-posthtml",
     "type": "module",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Unplugin for posthtml",
     "contributors": [
         {
@@ -91,7 +91,7 @@
         "build:fix": "bun scripts/postbuild.ts",
         "format": "bun x -b biome check --write ./",
         "prerelease": "bun run build && bun test && bun scripts/prepublish.ts",
-        "release": "git add . && bun x -b bumpp --all --no-tag"
+        "release": "git add . && bun x -b bumpp --all"
     },
     "peerDependencies": {
         "@farmfe/core": ">=1",
