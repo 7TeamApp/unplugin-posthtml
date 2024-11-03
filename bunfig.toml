@@ -1,0 +1,9 @@
+[install]
+peer = true
+auto = "auto"
+frozenLockfile = true
+registry = "https://registry.npmjs.org"
+
+[run]
+bun = true
+shell = "bun"

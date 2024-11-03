@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "lib": ["esnext", "DOM"],
+        "module": "esnext",
+        "moduleResolution": "node",
+        "paths": {
+            "unplugin-posthtml": ["."]
+        },
+        "resolveJsonModule": true,
+        "typeRoots": ["**/types/**/*", "**/@types/**/*", "**/*.d.ts"],
+        "allowJs": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "esModuleInterop": true
+    },
+    "exclude": ["dist"]
+}

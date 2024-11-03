@@ -1,0 +1,158 @@
+{
+    "name": "unplugin-posthtml",
+    "type": "module",
+    "version": "0.1.0",
+    "description": "Unplugin for posthtml",
+    "contributors": [
+        {
+            "name": "7TeamApp"
+        }
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/7TeamApp/unplugin-posthtml#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/7TeamApp/unplugin-posthtml.git"
+    },
+    "bugs": {
+        "url": "https://github.com/7TeamApp/unplugin-posthtml/issues"
+    },
+    "keywords": [
+        "unplugin",
+        "posthtml",
+        "vite",
+        "webpack",
+        "rollup",
+        "esbuild",
+        "farm",
+        "rolldown",
+        "rspack",
+        "transform",
+        "html"
+    ],
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
+        },
+        "./astro": {
+            "import": "./dist/astro.js",
+            "require": "./dist/astro.cjs"
+        },
+        "./rspack": {
+            "import": "./dist/rspack.js",
+            "require": "./dist/rspack.cjs"
+        },
+        "./vite": {
+            "import": "./dist/vite.js",
+            "require": "./dist/vite.cjs"
+        },
+        "./webpack": {
+            "import": "./dist/webpack.js",
+            "require": "./dist/webpack.cjs"
+        },
+        "./rollup": {
+            "import": "./dist/rollup.js",
+            "require": "./dist/rollup.cjs"
+        },
+        "./esbuild": {
+            "import": "./dist/esbuild.js",
+            "require": "./dist/esbuild.cjs"
+        },
+        "./nuxt": {
+            "import": "./dist/nuxt.js",
+            "require": "./dist/nuxt.cjs"
+        },
+        "./farm": {
+            "import": "./dist/farm.js",
+            "require": "./dist/farm.cjs"
+        },
+        "./types": {
+            "import": "./dist/types.js",
+            "require": "./dist/types.cjs"
+        },
+        "./*": "./*"
+    },
+    "main": "dist/index.cjs",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "typesVersions": {
+        "*": {
+            "*": ["./dist/*", "./*"]
+        }
+    },
+    "files": ["dist"],
+    "scripts": {
+        "dev": "bun run init && bun run format && bun run clean && tsup --watch src",
+        "clean": "bun -b --silent -e \"import $ from 'bun';await $`rm -rf dist`\"",
+        "init": "bun -b -e \"await Bun.file('node_modules/unplugin/package.json').exists()||(console.log('Installing dependencies...'),Bun.spawn(['bun','i']))\"",
+        "test": "bun test",
+        "build": "bun run init && bun run format && bun run clean && tsup",
+        "build:fix": "bun scripts/postbuild.ts",
+        "format": "bun x -b biome check --write ./",
+        "prerelease": "bun run build && bun test && bun scripts/prepublish.ts",
+        "release": "git add . && bun x -b bumpp --all"
+    },
+    "peerDependencies": {
+        "@farmfe/core": ">=1",
+        "@nuxt/kit": "^3",
+        "@nuxt/schema": "^3",
+        "esbuild": "^0",
+        "rollup": "^3",
+        "vite": ">=3",
+        "webpack": "^4 || ^5"
+    },
+    "peerDependenciesMeta": {
+        "@farmfe/core": {
+            "optional": true
+        },
+        "@nuxt/kit": {
+            "optional": true
+        },
+        "@nuxt/schema": {
+            "optional": true
+        },
+        "esbuild": {
+            "optional": true
+        },
+        "rollup": {
+            "optional": true
+        },
+        "vite": {
+            "optional": true
+        },
+        "webpack": {
+            "optional": true
+        }
+    },
+    "dependencies": {
+        "posthtml": "0.16.6",
+        "posthtml-load-config": "2.0.0",
+        "unplugin": "^1.12.2",
+        "@recursive/assign": "^3.0.1"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "1.9.2",
+        "@farmfe/core": "1.3.31",
+        "@nuxt/kit": "^3.13.0",
+        "@nuxt/schema": "^3.13.0",
+        "@swc/cli": "^0.4.1-nightly.20240914",
+        "@swc/core": "1.7.28",
+        "@types/bun": "1.1.12",
+        "@types/cosmiconfig": "4.0.0",
+        "@types/node": "22.8.6",
+        "astro": "^4.16.8",
+        "bumpp": "latest",
+        "bun": "1.1.34",
+        "chalk": "^5.3.0",
+        "nuxt": "3.13.2",
+        "fast-glob": "^3.3.2",
+        "rollup": "^4.21.2",
+        "rolldown": "0.13.2",
+        "@rspack/core": "1.0.14",
+        "tsup": "8.3.5",
+        "typescript": "5.6.3",
+        "vite": "^5.4.2",
+        "webpack": "^5.94.0"
+    }
+}

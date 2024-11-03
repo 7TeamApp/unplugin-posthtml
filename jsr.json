@@ -1,0 +1,33 @@
+{
+    "name": "@7teamapp/unplugin-posthtml",
+    "version": "0.1.0",
+    "license": "MIT",
+    "publish": {
+        "include": [
+            "dist/",
+            "src/",
+            "public/",
+            "README.md",
+            "jsr.json",
+            "LICENSE",
+            "package.json",
+            "tsup.config.ts",
+            "tsconfig.json"
+        ],
+        "exclude": ["!**/*.{cjs, cts}"]
+    },
+    "exports": {
+        ".": "./src/index.ts",
+        "./astro": "./src/astro.ts",
+        "./esbuild": "./src/esbuild.ts",
+        "./farm": "./src/farm.ts",
+        "./nuxt": "./src/nuxt.ts",
+        "./rolldown": "./src/rolldown.ts",
+        "./rollup": "./src/rollup.ts",
+        "./rspack": "./src/rspack.ts",
+        "./types": "./src/types.ts",
+        "./vite": "./src/vite.ts",
+        "./webpack": "./src/webpack.ts",
+        "./package.json": "./package.json"
+    }
+}
